@@ -4,7 +4,12 @@ const mongoose = require('mongoose')
 const PORT = 3000
 const {MONGOURI} = require('./keys')
 
-mongoose.connect(MONGOURI)
+require('./models/user')
+
+mongoose.connect(MONGOURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
 
 mongoose.connection.on('connected', () => {
     console.log('Connected to Mongo')

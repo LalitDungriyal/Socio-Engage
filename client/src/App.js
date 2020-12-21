@@ -1,32 +1,30 @@
-import React from 'react'
-import { BrowserRouter, Route } from 'react-router-dom';
-import NavBar from './Components/NavBar';
-import CreatePost from './Components/screens/CreatePost';
-import Home from './Components/screens/Home';
-import Profile from './Components/screens/Profile';
-import SignIn from './Components/screens/SignIn';
-import SignUp from './Components/screens/SignUp';
-
+import React,{useEffect,createContext,useReducer,useContext} from 'react';
+import "./App.css"
+import {BrowserRouter,Route,Switch} from 'react-router-dom'
+import NavBar from './components/NavBar'
+import Home from './components/screens/Home'
+import Signin from './components/screens/SignIn'
+import Profile from './components/screens/Profile'
+import Signup from './components/screens/Signup'
 function App() {
   return (
-    <BrowserRouter>
-      <NavBar/>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/signin">
-        <SignIn />
-      </Route>
-      <Route path="/signup">
-        <SignUp />
-      </Route>
-      <Route path="/profile">
-        <Profile />
-      </Route>
-      <Route path="/createpost">
-        <CreatePost />
-      </Route>
-    </BrowserRouter>
+      <BrowserRouter>
+        <NavBar />
+        <Switch>
+          <Route exact path="/" >
+            <Home />
+          </Route>
+          <Route path="/signin">
+            <Signin />
+          </Route>
+          <Route path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
+        </Switch>
+      </BrowserRouter>
   );
 }
 

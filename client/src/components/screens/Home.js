@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import {UserContext} from '../../App'
 
 const Home  = ()=>{
@@ -115,7 +116,9 @@ const Home  = ()=>{
            {data.map((item, index) => {
               return (
                  <div key={index}>
-                    <h1>{item.postedBy.name}</h1>
+                    <Link to={item.postedBy._id !== state._id?"/profile/"+item.postedBy._id :"/profile"  }>
+                        <h1>{item.postedBy.name}</h1>
+                    </Link>
                     {
                        item.postedBy._id == state._id 
                        &&

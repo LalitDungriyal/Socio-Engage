@@ -5,6 +5,7 @@ import NavBar from './components/NavBar'
 import Home from './components/screens/Home'
 import Signin from './components/screens/SignIn'
 import Profile from './components/screens/Profile'
+import UserProfile from './components/screens/UserProfile'
 import Signup from './components/screens/Signup'
 import CreatePost from './components/screens/CreatePost';
 import {initialState, reducer} from './Reducers/userReducer'
@@ -43,6 +44,9 @@ const Routing = () => {
         </Route>
         <Route path="/createpost">
           <CreatePost/>
+        </Route>
+        <Route path="/profile/:userid">
+          <UserProfile/>
         </Route>
       </Switch>
   )

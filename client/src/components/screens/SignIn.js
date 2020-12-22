@@ -1,7 +1,9 @@
-import React,{useState} from 'react'
+import React,{useState, useContext} from 'react'
 import {Link,useHistory} from 'react-router-dom'
+import {UserContext} from '../../App'
 
 const SignIn = ()=>{
+    const [state, dispatch] = useContext(UserContext)
     const history = useHistory()
     const [password,setPasword] = useState("")
     const [email,setEmail] = useState("")
@@ -25,6 +27,7 @@ const SignIn = ()=>{
            else{
                localStorage.setItem("jwt", data.token)
                localStorage.setItem("user", JSON.stringify(data.user))
+               dispatch({type:"USER", payload:data.user})
                alert("Signed in Successfully")
                history.push('/')
            }

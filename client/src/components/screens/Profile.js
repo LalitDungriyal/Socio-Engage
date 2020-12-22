@@ -18,11 +18,14 @@ const Profile  = ()=>{
 
     return(
         <div>
+            <h3>{state? state.name: "loading"}</h3>
+            <h4>{state? state.email: "loading"}</h4>
+            <p>{state?state.followers.length:"0"} followers</p>
+            <p>{state?state.following.length:"0"} following</p>
             {myposts.map((item, index) => {
                 return (
                     <div key={index}>
                         myposts will appear here
-                        <p>{state? state.name: "loading"}</p>
                     </div>
                 )
             })}

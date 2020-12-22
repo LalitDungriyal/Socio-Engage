@@ -1,30 +1,66 @@
-import React from 'react'
-import {Button, Form} from 'react-bootstrap'
+import React,{useState} from 'react'
+import {Link,useHistory} from 'react-router-dom'
 
-const SignIn  = ()=>{
+const SignIn = ()=>{
+    const history = useHistory()
+    const [password,setPasword] = useState("")
+    const [email,setEmail] = useState("")
+    
+    const PostData = ()=>{
+        
+        fetch("/signin",{
+            method:"post",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                password,
+                email,
+            })
+        }).then(res=>res.json())
+        .then(data=>{
+           if(data.error){
+              alert(data.error)
+           }
+           else{
+               alert("Signed in Successfully")
+               history.push('/')
+           }
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
 
    return (
-    <Form>
-        <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-            <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-            </Form.Text>
-        </Form.Group>
-    
-        <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
+      <div>
+          <div className="card auth-card input-field">
+            <h2>Instagram</h2>
+            
+            <input
+            type="text"
+            placeholder="email"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
+            />
 
-        <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
-        <Button variant="primary" type="submit">
-            Sign In
-        </Button>
-    </Form>
+            <input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e)=>setPasword(e.target.value)}
+            />
+
+            <button className="btn waves-effect waves-light #64b5f6 blue darken-1"
+            onClick={()=>PostData()}
+            >
+                SignIn
+            </button>
+            <h5>
+                <Link to="/signup">Don't have an account ?</Link>
+            </h5>
+    
+        </div>
+      </div>
    )
 }
 

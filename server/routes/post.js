@@ -17,11 +17,11 @@ router.get('/allposts', (req, res) => {
 })
 
 router.post('/createpost', requireLogin, (req, res) => {
-    const {title, body} = req.body
+    const {title, body, imgUrl} = req.body
 
     console.log(req)
 
-    if(!title || !body) {
+    if(!title || !body || !imgUrl) {
         return res.status(422).json({error: "Please complete the required fields"})
     }
 
@@ -30,6 +30,7 @@ router.post('/createpost', requireLogin, (req, res) => {
     const post = new Post({
         title: title,
         body: body,
+        photo: imgUrl,
         postedBy: req.user
     })
 

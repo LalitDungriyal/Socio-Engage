@@ -23,6 +23,8 @@ const SignIn = ()=>{
               alert(data.error)
            }
            else{
+               localStorage.setItem("jwt", data.token)
+               localStorage.setItem("user", JSON.stringify(data.user))
                alert("Signed in Successfully")
                history.push('/')
            }

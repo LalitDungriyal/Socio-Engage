@@ -14,6 +14,7 @@ const NavBar = ()=>{
           <Link to="/profile" className="nav-link">Profile</Link>
           <Link to="/signin" className="nav-link">Sign In</Link>
           <Link to="/signup" className="nav-link">Sign Up</Link>
+          <Link to="/createpost" className="nav-link">Create Post</Link>
         </Nav>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />

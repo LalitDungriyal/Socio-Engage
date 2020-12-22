@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    pic: {
+        type: String,
+        default: "https://res.cloudinary.com/omanshu840/image/upload/v1608646621/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582_wz5te3.jpg"
+    },
     followers: [
         {
             type: ObjectId,

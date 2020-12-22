@@ -14,6 +14,7 @@ const NavBar = ()=>{
           <Link to="/" className="nav-link">Home</Link>,
           <Link to="/profile" className="nav-link">Profile</Link>,
           <Link to="/createpost" className="nav-link">Create Post</Link>,
+          <Link to="/followingpost" className="nav-link">My Following Post</Link>,
           <Button 
             variant="primary" 
             onClick={() => {

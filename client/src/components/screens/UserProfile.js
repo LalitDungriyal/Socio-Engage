@@ -84,6 +84,7 @@ const UserProfile  = ()=>{
             userProfile 
             ?
             <div>
+                <img src={userProfile.user.pic}></img>
                 <h3>{userProfile.user.name}</h3>
                 <h5>{userProfile.user.email}</h5>
                 {userProfile.posts.map((item, index) => {

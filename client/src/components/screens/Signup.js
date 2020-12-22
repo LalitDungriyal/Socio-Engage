@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 
 const SignUp  = ()=>{
@@ -6,9 +6,35 @@ const SignUp  = ()=>{
     const [name,setName] = useState("")
     const [password,setPasword] = useState("")
     const [email,setEmail] = useState("")
-    
-    const PostData = ()=>{
-        
+    const [image,setImage] = useState("")
+    const [imgurl,setImgUrl] = useState(undefined)
+
+    useEffect(() => {
+        if(imgurl) {
+            uploadFields()
+        }
+    }, [imgurl])
+
+    const uploadPic = () => {
+        const data = new FormData()
+        data.append("file", image)
+        data.append("upload_preset", "social-connect")
+        data.append("cloud_name", "omanshu840")
+        fetch("https://api.cloudinary.com/v1_1/omanshu840/image/upload", {
+            method: "post",
+            body: data
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.url)
+            setImgUrl(data.url)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    const uploadFields = () => {
         fetch("/signup",{
             method:"post",
             headers:{
@@ -18,6 +44,7 @@ const SignUp  = ()=>{
                 name,
                 password,
                 email,
+                pic: imgurl
             })
         }).then(res=>res.json())
         .then(data=>{
@@ -31,6 +58,18 @@ const SignUp  = ()=>{
         }).catch(err=>{
             console.log(err)
         })
+    }
+
+    const PostData = ()=>{
+
+        if(image) {
+            uploadPic()
+        }
+        else {
+            uploadFields()
+        }
+        
+        
     }
 
    return (
@@ -54,6 +93,12 @@ const SignUp  = ()=>{
             placeholder="password"
             value={password}
             onChange={(e)=>setPasword(e.target.value)}
+            />
+
+            <input
+                type="file"
+                placeholder="upload pic"
+                onChange={(e) => setImage(e.target.files[0])}
             />
 
             <button className="btn waves-effect waves-light #64b5f6 blue darken-1"

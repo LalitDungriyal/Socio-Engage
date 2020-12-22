@@ -25,7 +25,7 @@ const SignUp  = ()=>{
               alert(data.error)
            }
            else{
-               alert(data.message)
+               alert("signed up successfully")
                history.push('/signin')
            }
         }).catch(err=>{

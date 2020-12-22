@@ -1,18 +1,29 @@
 import React,{useContext,useRef,useEffect,useState} from 'react'
 import { Button, Form, FormControl, Nav, Navbar } from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {UserContext} from '../App'
 
 const NavBar = ()=>{
 
     const {state, dispatch} = useContext(UserContext)
+    const history = useHistory()
     
     const renderList = () => {
       if(state) {
         return  [
           <Link to="/" className="nav-link">Home</Link>,
           <Link to="/profile" className="nav-link">Profile</Link>,
-          <Link to="/createpost" className="nav-link">Create Post</Link>
+          <Link to="/createpost" className="nav-link">Create Post</Link>,
+          <Button 
+            variant="primary" 
+            onClick={() => {
+              localStorage.clear()
+              dispatch({type: "CLEAR"})
+              history.push('/signin')
+            }}
+          >
+              Log Out
+          </Button>
         ]
       }
       else {

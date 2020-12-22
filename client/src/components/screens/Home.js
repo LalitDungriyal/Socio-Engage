@@ -68,12 +68,64 @@ const Home  = ()=>{
       })
    }
 
+   const makeComment = (text,postId)=>{
+      fetch('/comment',{
+          method:"put",
+          headers:{
+              "Content-Type":"application/json",
+              "Authorization":"Bearer "+localStorage.getItem("jwt")
+          },
+          body:JSON.stringify({
+              postId,
+              text
+          })
+      }).then(res=>res.json())
+      .then(result=>{
+          const newData = data.map(item=>{
+            if(item._id==result._id){
+                return result
+            }else{
+                return item
+            }
+         })
+        setData(newData)
+      }).catch(err=>{
+          console.log(err)
+      })
+   }
+
+   const deletePost = (postid)=>{
+      fetch(`/deletepost/${postid}`,{
+          method:"delete",
+          headers:{
+              Authorization:"Bearer "+localStorage.getItem("jwt")
+          }
+      }).then(res=>res.json())
+      .then(result=>{
+          console.log(result)
+          const newData = data.filter(item=>{
+              return item._id !== result._id
+          })
+          setData(newData)
+      })
+   }
+
    return(
         <div>
            {data.map((item, index) => {
               return (
                  <div key={index}>
                     <h1>{item.postedBy.name}</h1>
+                    {
+                       item.postedBy._id == state._id 
+                       &&
+                       <Button 
+                           variant="primary"
+                           onClick={() => {deletePost(item._id)}}
+                        >
+                           Delete
+                        </Button>
+                    }
                      <p>{item.likes.length} likes</p>
                      {
                         item.likes.includes(state._id)
@@ -92,6 +144,24 @@ const Home  = ()=>{
                            Like
                         </Button>
                      }
+
+                     {
+                        item.comments.map(record => {
+                           return (
+                              <div>
+                                 <p>{record.postedBy.name}</p>
+                                 <p>{record.text}</p>
+                              </div>
+                           )
+                        })
+                     }
+
+                     <form onSubmit={(e) => {
+                        e.preventDefault()
+                        makeComment(e.target[0].value, item._id)
+                     }}>
+                        <input type="text" placeholder="add a comment" />
+                     </form>
                      
                     {/* <img src={item.photo}></img> */}
                  </div>

@@ -1,5 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {Link,useHistory} from 'react-router-dom'
+import { Card, Container, Row } from 'react-bootstrap'
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import {FormControl, IconButton, Input, InputAdornment, InputLabel } from '@material-ui/core';
 
 const CreatePost = () => {
 
@@ -58,7 +62,59 @@ const CreatePost = () => {
     }
 
     return (
-        <div>
+        <>
+        <Container>            
+            <Row className="justify-content-md-center">
+                <div className="col-12 col-md-6 card-login">
+                    <Paper elevation={3} >
+                        <Card className="text-center">
+                            <Card.Header><h2>Create New Post</h2></Card.Header>
+                            <Card.Body>
+
+                                <FormControl fullWidth>
+                                    <InputLabel htmlFor="name-field">Title*</InputLabel>
+                                    <Input
+                                        id="name-field"
+                                        type='text'
+                                        value={title}
+                                        onChange={(e)=>setTitle(e.target.value)}
+                                    />
+                                </FormControl>
+
+                                <FormControl fullWidth>
+                                    <InputLabel htmlFor="email-field">Content*</InputLabel>
+                                    <Input
+                                        id="email-field"
+                                        type='text'
+                                        value={body}
+                                        onChange={(e)=>setBody(e.target.value)}
+                                    />
+                                </FormControl>
+
+                                <input
+                                    type="file"
+                                    placeholder="upload image"
+                                    onChange={(e) => setImage(e.target.files[0])}
+                                />
+
+                            </Card.Body>
+                            <Card.Footer className="text-muted">
+                                <Button 
+                                    size="large"
+                                    variant="contained" 
+                                    color="primary"
+                                    onClick={()=>postDetails()}
+                                >
+                                    Post
+                                </Button>
+                            </Card.Footer>
+                        </Card>
+                    </Paper>
+                </div>
+            </Row>
+        </Container>
+        
+        {/* <div>
           <div className="card auth-card input-field">
             <h2>Create Post</h2>
             
@@ -92,7 +148,8 @@ const CreatePost = () => {
             </h5>
     
         </div>
-      </div>
+      </div> */}
+      </>
     )
 }
 

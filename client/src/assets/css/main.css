@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 body {
-    padding-top: 50px;
+    padding-top: 100px;
     font-family: 'Raleway', sans-serif;
     /* text-align: center; */
 }
@@ -16,4 +16,21 @@ body {
 
 .card-login .MuiFormControl-root{
     margin-bottom: 30px;
+}
+
+.card-post {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+.card-post .card-body{
+    padding: 0px;
+}
+
+.card-post .card-body img{
+    width: 100%;
+    height: auto;
+}
+
+.card-post .MuiList-root {
+    width: 100%;
 }

@@ -4,7 +4,7 @@ import { Card, Container, Row } from 'react-bootstrap'
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import {FormControl, IconButton, Input, InputAdornment, InputLabel } from '@material-ui/core';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import InputIcon from '@material-ui/icons/Input';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -153,7 +153,7 @@ const SignUp  = ()=>{
                                 variant="contained" 
                                 color="primary"
                                 onClick={()=>PostData()}
-                                endIcon={<ExitToAppIcon/>}
+                                endIcon={<InputIcon/>}
                             >
                                 Sign Up
                             </Button>

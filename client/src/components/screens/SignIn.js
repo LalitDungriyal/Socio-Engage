@@ -8,7 +8,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import {FormControl, IconButton, Input, InputAdornment, InputLabel } from '@material-ui/core';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import InputIcon from '@material-ui/icons/Input';
 
 const SignIn = ()=>{
     const {state, dispatch} = useContext(UserContext)
@@ -99,7 +99,7 @@ const SignIn = ()=>{
                                     variant="contained" 
                                     color="primary"
                                     onClick={()=>PostData()}
-                                    endIcon={<ExitToAppIcon/>}
+                                    endIcon={<InputIcon/>}
                                 >
                                     Sign In
                                 </Button>

@@ -1,7 +1,12 @@
+import { Accordion, AccordionDetails, AccordionSummary, Avatar, CardHeader, Divider, IconButton, InputAdornment, List, ListItem, ListItemText, Paper, TextField } from '@material-ui/core'
 import React, {useState, useEffect, useContext} from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Card, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import {UserContext} from '../../App'
+import DeleteIcon from '@material-ui/icons/Delete';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const SubUserPosts  = ()=>{
 
@@ -112,65 +117,109 @@ const SubUserPosts  = ()=>{
    }
 
    return(
-        <div>
+        <Container>
            {data.map((item, index) => {
               return (
-                 <div key={index}>
-                    <Link to={item.postedBy._id !== state._id?"/profile/"+item.postedBy._id :"/profile"  }>
-                        <h1>{item.postedBy.name}</h1>
-                    </Link>
-                    {
-                       item.postedBy._id == state._id 
-                       &&
-                       <Button 
-                           variant="primary"
-                           onClick={() => {deletePost(item._id)}}
-                        >
-                           Delete
-                        </Button>
-                    }
-                     <p>{item.likes.length} likes</p>
-                     {
-                        item.likes.includes(state._id)
-                        ? 
-                        <Button 
-                           variant="primary"
-                           onClick={() => {unlikePost(item._id)}}
-                        >
-                           Unlike
-                        </Button>
-                        :
-                        <Button 
-                           variant="primary"
-                           onClick={() => {likePost(item._id)}}
-                        >
-                           Like
-                        </Button>
-                     }
-
-                     {
-                        item.comments.map(record => {
-                           return (
+               <Row className="justify-content-md-center" key={index}>
+                  <div className="col-12 col-md-8 card-post">
+                     <Paper elevation={3} >
+                        <Card>
+                           <CardHeader
+                              avatar={
+                                 <Avatar>
+                                    <img src="https://res.cloudinary.com/omanshu840/image/upload/v1608609510/sample.jpg" alt="..." />
+                                 </Avatar>
+                              }
+                              action={
+                                 item.postedBy._id == state._id 
+                                 &&
+                                 <IconButton 
+                                    variant="primary"
+                                    onClick={() => {deletePost(item._id)}}
+                                 >
+                                    <DeleteIcon/>
+                                 </IconButton>
+                              }
+                              title={
+                                 <Link to={item.postedBy._id !== state._id?"/profile/"+item.postedBy._id :"/profile"  }>
+                                    {item.postedBy.name}
+                                 </Link>
+                              }
+                              subheader={item.postedBy.email}
+                           />
+                           <Card.Body>
+                              <img src={item.photo} alt="..." />
+                           </Card.Body>
+                           <Card.Footer className="text-muted">
                               <div>
-                                 <p>{record.postedBy.name}</p>
-                                 <p>{record.text}</p>
+                                 {
+                                    item.likes.includes(state._id)
+                                    ? 
+                                    <IconButton onClick={() => {unlikePost(item._id)}}>
+                                       <FavoriteIcon/>
+                                    </IconButton>
+                                    :
+                                    <IconButton onClick={() => {likePost(item._id)}}>
+                                       <FavoriteBorderIcon/>
+                                    </IconButton>
+                                 }
                               </div>
-                           )
-                        })
-                     }
-
-                     <form onSubmit={(e) => {
-                        e.preventDefault()
-                        makeComment(e.target[0].value, item._id)
-                     }}>
-                        <input type="text" placeholder="add a comment" />
-                     </form>
-                     
-                    {/* <img src={item.photo}></img> */}
-                 </div>
+                              <div>
+                                 {item.likes.length} Likes
+                              </div>
+                              <div className="mt-3">
+                                 <h4>{item.title}</h4>
+                              </div>
+                              <div>
+                                 <p>{item.body}</p>
+                              </div>
+                              <Accordion>
+                                 <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
+                                 >
+                                    Comments
+                                 </AccordionSummary>
+                                 <AccordionDetails>
+                                       <List>
+                                          {
+                                             item.comments.map(record => {
+                                                return (
+                                                   <>
+                                                      <Divider variant="inset" component="li" />
+                                                      <ListItem>
+                                                         <ListItemText 
+                                                            primary={record.postedBy.name}
+                                                            secondary={record.text}
+                                                         />
+                                                      </ListItem>
+                                                   </>
+                                                )
+                                             })
+                                          }
+                                          <ListItem>
+                                             <form onSubmit={(e) => {
+                                                e.preventDefault()
+                                                makeComment(e.target[0].value, item._id)
+                                             }}>
+                                                <TextField
+                                                   id="input-with-icon-textfield"
+                                                   label="Add a comment"
+                                                />
+                                             </form>
+                                          </ListItem>
+                                       </List>
+                                 </AccordionDetails>
+                              </Accordion>
+                           </Card.Footer>
+                        </Card>
+                     </Paper>
+                  </div>
+               </Row>
               )
            })}
-        </div>
+        </Container>
    )
 }
 

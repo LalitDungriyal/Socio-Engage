@@ -1,5 +1,14 @@
 import React,{useEffect, useState} from 'react'
 import {Link,useHistory} from 'react-router-dom'
+import { Card, Container, Row } from 'react-bootstrap'
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import {FormControl, IconButton, Input, InputAdornment, InputLabel } from '@material-ui/core';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import EmailIcon from '@material-ui/icons/Email';
 
 const SignUp  = ()=>{
     const history = useHistory()
@@ -8,6 +17,7 @@ const SignUp  = ()=>{
     const [email,setEmail] = useState("")
     const [image,setImage] = useState("")
     const [imgurl,setImgUrl] = useState(undefined)
+    const [showPassword, togglePassword] = useState(false)
 
     useEffect(() => {
         if(imgurl) {
@@ -73,45 +83,87 @@ const SignUp  = ()=>{
     }
 
    return (
-      <div>
-          <div className="card auth-card input-field">
-            <h2>Instagram</h2>
-            <input
-            type="text"
-            placeholder="name"
-            value={name}
-            onChange={(e)=>setName(e.target.value)}
-            />
-            <input
-            type="text"
-            placeholder="email"
-            value={email}
-            onChange={(e)=>setEmail(e.target.value)}
-            />
-            <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e)=>setPasword(e.target.value)}
-            />
+    <Container>            
+        <Row className="justify-content-md-center">
+            <div className="col-12 col-md-6 card-login">
+                <Paper elevation={3} >
+                    <Card className="text-center">
+                        <Card.Header><h2>Sign Up</h2></Card.Header>
+                        <Card.Body>
 
-            <input
-                type="file"
-                placeholder="upload pic"
-                onChange={(e) => setImage(e.target.files[0])}
-            />
+                            <FormControl fullWidth>
+                                <InputLabel htmlFor="name-field">Name*</InputLabel>
+                                <Input
+                                    id="name-field"
+                                    type='text'
+                                    value={name}
+                                    onChange={(e)=>setName(e.target.value)}
+                                    endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton>
+                                            <AccountCircleIcon/>
+                                        </IconButton>
+                                    </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
 
-            <button className="btn waves-effect waves-light #64b5f6 blue darken-1"
-            onClick={()=>PostData()}
-            >
-                SignUP
-            </button>
-            <h5>
-                <Link to="/signin">Already have an account ?</Link>
-            </h5>
-    
-        </div>
-      </div>
+                            <FormControl fullWidth>
+                                <InputLabel htmlFor="email-field">Email*</InputLabel>
+                                <Input
+                                    id="email-field"
+                                    type='email'
+                                    value={email}
+                                    onChange={(e)=>setEmail(e.target.value)}
+                                    endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton>
+                                            <EmailIcon/>
+                                        </IconButton>
+                                    </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
+
+                            <FormControl fullWidth>
+                                <InputLabel htmlFor="standard-adornment-password">Password*</InputLabel>
+                                <Input
+                                    required
+                                    id="standard-adornment-password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    value={password}
+                                    onChange={(e)=>setPasword(e.target.value)}
+                                    endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={ () => togglePassword(!showPassword)}
+                                        >
+                                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
+                            <Link to="/signin">Already have an account? Sign In</Link>
+                        </Card.Body>
+                        <Card.Footer className="text-muted">
+                            <Button 
+                                size="large"
+                                variant="contained" 
+                                color="primary"
+                                onClick={()=>PostData()}
+                                endIcon={<ExitToAppIcon/>}
+                            >
+                                Sign Up
+                            </Button>
+                        </Card.Footer>
+                    </Card>
+                </Paper>
+            </div>
+        </Row>
+    </Container>
+      
    )
 }
 

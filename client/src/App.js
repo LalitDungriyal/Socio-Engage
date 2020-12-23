@@ -1,5 +1,4 @@
 import React,{useEffect,createContext,useReducer,useContext} from 'react';
-import "./App.css"
 import {BrowserRouter,Route,Switch, useHistory} from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Home from './components/screens/Home'

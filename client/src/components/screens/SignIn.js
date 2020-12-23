@@ -1,12 +1,22 @@
 import React,{useState, useContext} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import {UserContext} from '../../App'
+import { Card, Container, Row } from 'react-bootstrap'
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import EmailIcon from '@material-ui/icons/Email';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import {FormControl, IconButton, Input, InputAdornment, InputLabel } from '@material-ui/core';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const SignIn = ()=>{
     const {state, dispatch} = useContext(UserContext)
     const history = useHistory()
     const [password,setPasword] = useState("")
     const [email,setEmail] = useState("")
+    const [showPassword, togglePassword] = useState(false)
+
     
     const PostData = ()=>{
         
@@ -28,7 +38,6 @@ const SignIn = ()=>{
                localStorage.setItem("jwt", data.token)
                localStorage.setItem("user", JSON.stringify(data.user))
                dispatch({type:"USER", payload:data.user})
-               alert("Signed in Successfully")
                history.push('/')
            }
         }).catch(err=>{
@@ -37,35 +46,69 @@ const SignIn = ()=>{
     }
 
    return (
-      <div>
-          <div className="card auth-card input-field">
-            <h2>Instagram</h2>
-            
-            <input
-            type="text"
-            placeholder="email"
-            value={email}
-            onChange={(e)=>setEmail(e.target.value)}
-            />
+        <Container>            
+            <Row className="justify-content-md-center">
+                <div className="col-12 col-md-6 card-login">
+                    <Paper elevation={3} >
+                        <Card className="text-center">
+                            <Card.Header><h2>Sign In</h2></Card.Header>
+                            <Card.Body>
 
-            <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e)=>setPasword(e.target.value)}
-            />
+                                <FormControl fullWidth>
+                                    <InputLabel htmlFor="email-field">Email*</InputLabel>
+                                    <Input
+                                        id="email-field"
+                                        type='email'
+                                        value={email}
+                                        onChange={(e)=>setEmail(e.target.value)}
+                                        endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton>
+                                                <EmailIcon/>
+                                            </IconButton>
+                                        </InputAdornment>
+                                        }
+                                    />
+                                </FormControl>
 
-            <button className="btn waves-effect waves-light #64b5f6 blue darken-1"
-            onClick={()=>PostData()}
-            >
-                SignIn
-            </button>
-            <h5>
-                <Link to="/signup">Don't have an account ?</Link>
-            </h5>
-    
-        </div>
-      </div>
+                                <FormControl fullWidth>
+                                    <InputLabel htmlFor="standard-adornment-password">Password*</InputLabel>
+                                    <Input
+                                        required
+                                        id="standard-adornment-password"
+                                        type={showPassword ? 'text' : 'password'}
+                                        value={password}
+                                        onChange={(e)=>setPasword(e.target.value)}
+                                        endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={ () => togglePassword(!showPassword)}
+                                            >
+                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                        }
+                                    />
+                                </FormControl>
+                                <Link to="/signup">Don't have an account? Sign Up</Link>
+                            </Card.Body>
+                            <Card.Footer className="text-muted">
+                                <Button 
+                                    size="large"
+                                    variant="contained" 
+                                    color="primary"
+                                    onClick={()=>PostData()}
+                                    endIcon={<ExitToAppIcon/>}
+                                >
+                                    Sign In
+                                </Button>
+                            </Card.Footer>
+                        </Card>
+                    </Paper>
+                </div>
+            </Row>
+        </Container>
    )
 }
 

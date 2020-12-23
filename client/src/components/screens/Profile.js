@@ -1,5 +1,6 @@
+import { Card, Paper } from '@material-ui/core'
 import React, {useEffect, useState, useContext} from 'react'
-import { Button } from 'react-bootstrap'
+import {Container, Image, Row } from 'react-bootstrap'
 import {UserContext} from '../../App'
 
 const Profile  = ()=>{
@@ -14,6 +15,7 @@ const Profile  = ()=>{
             }
          }).then(res => res.json())
          .then((result) => {
+             console.log(result.myPost)
             setMyPosts(result.myPost)
          })
     }, [])
@@ -58,26 +60,51 @@ const Profile  = ()=>{
     }
 
     return(
-       
-        <div>
-            <img src={state? state.pic: "loading"}></img>
-            <h3>{state? state.name: "loading"}</h3>
-            <h4>{state? state.email: "loading"}</h4>
-            <p>{state?state.followers.length:"0"} followers</p>
-            <p>{state?state.following.length:"0"} following</p>
-            <input
-                type="file"
-                placeholder="update pic"
-                onChange={(e) => updatePhoto(e.target.files[0])}
-            />
-            {myposts.map((item, index) => {
-                return (
-                    <div key={index}>
-                        myposts will appear here
-                    </div>
-                )
-            })}
-        </div>
+        <>
+            <Container>
+                <Card elevation={3}>
+                    <Row>
+                        <div className="profile-img col-12 col-md-3">
+                            <Image src={state? state.pic: "loading"} rounded />
+                        </div>
+                        <div className="profile-info col-12 col-md-9">
+                            <div className="content pt-3">
+                                <h3 className="pl-4">{state? state.name: "loading"}</h3>
+                                <p className="text-muted pl-4">{state? state.email: "loading"}</p>
+                                <p className="pl-4">
+                                    <div>
+                                        {state?state.followers.length:"0"} followers  
+                                    </div>
+                                    <div>
+                                        {state?state.following.length:"0"} following
+                                    </div>
+                                    <div className="mt-3">
+                                        <strong>Update pic</strong>
+                                        <input
+                                            className="px-3"
+                                            type="file"
+                                            placeholder="update pic"
+                                            onChange={(e) => updatePhoto(e.target.files[0])}
+                                        />
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </Row>
+                </Card>
+                <Card className="mt-4" elevation={3}>
+                    <Row>
+                        {myposts.map((item, index) => {
+                            return (
+                                <div key={index} className="col-12 col-md-3 profile-feed">
+                                    <img src={item.photo}/>
+                                </div>
+                            )
+                        })}
+                    </Row>
+                </Card>
+            </Container>
+        </>
    )
 }
 

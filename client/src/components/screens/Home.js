@@ -188,7 +188,7 @@ const Home  = ()=>{
                                                 item.comments.map(record => {
                                                    return (
                                                       <>
-                                                         <Divider variant="inset" component="li" />
+                                                         <Divider/>
                                                          <ListItem>
                                                             <ListItemText 
                                                                primary={record.postedBy.name}
@@ -199,6 +199,7 @@ const Home  = ()=>{
                                                    )
                                                 })
                                              }
+                                             <Divider/>
                                              <ListItem>
                                                 <form onSubmit={(e) => {
                                                    e.preventDefault()

@@ -1,5 +1,6 @@
+import { Card } from '@material-ui/core'
 import React, {useEffect, useState, useContext} from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Container, Image, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import {UserContext} from '../../App'
 
@@ -16,6 +17,7 @@ const UserProfile  = ()=>{
             }
         }).then(res=>res.json())
         .then(result=>{
+            console.log(result)
             setProfile(result)
         })
     },[])
@@ -83,38 +85,48 @@ const UserProfile  = ()=>{
         {
             userProfile 
             ?
-            <div>
-                <img src={userProfile.user.pic}></img>
-                <h3>{userProfile.user.name}</h3>
-                <h5>{userProfile.user.email}</h5>
-                {userProfile.posts.map((item, index) => {
-                    return (
-                        <div key={index}>
-                            users posts will appear here
+            <Container>
+                <Card elevation={3} className="p-2">
+                    <Row>
+                        <div className="profile-img col-12 col-md-3">
+                            <Image src={userProfile.user.pic} rounded />
                         </div>
-                    )
-                })}
-                <p>{userProfile.user.followers.length} followers</p>
-                <p>{userProfile.user.following.length} following</p>
-                {
-                    showfollow
-                    ?
-                    <Button
-                    variant="primary"
-                    onClick={()=>followUser()}
-                    >
-                        follow
-                    </Button>
-                    :
-                    <Button
-                    variant="primary"
-                    onClick={()=>unfollowUser()}
-                    >
-                        Unfollow
-                    </Button>
-                }
-                
-            </div> 
+                        <div className="profile-info col-12 col-md-9">
+                            <div className="content pt-3">
+                                <h3 className="pl-4">{userProfile.user.name}</h3>
+                                <p className="text-muted pl-4">{userProfile.user.email}</p>
+                                <p className="pl-4">
+                                    <div>
+                                        {userProfile.user.followers.length} followers  
+                                    </div>
+                                    <div>
+                                        {userProfile.user.following.length} following
+                                    </div>
+                                </p>
+                                <div className="pl-4">
+                                    {
+                                        showfollow
+                                        ?
+                                        <Button
+                                        variant="primary"
+                                        onClick={()=>followUser()}
+                                        >
+                                            follow
+                                        </Button>
+                                        :
+                                        <Button
+                                        variant="primary"
+                                        onClick={()=>unfollowUser()}
+                                        >
+                                            Unfollow
+                                        </Button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </Row>
+                </Card>
+            </Container>
             :
             <h2>Loading .. </h2>
         }

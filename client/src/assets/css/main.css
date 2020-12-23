@@ -2,12 +2,13 @@
 
 body {
     padding-top: 100px;
+    padding-bottom: 100px;
     font-family: 'Raleway', sans-serif;
     /* text-align: center; */
 }
 
 .card-login {
-    margin-top: 15vh;
+    margin-top: 10vh;
 }
 
 .card-login .card-body{
@@ -33,4 +34,16 @@ body {
 
 .card-post .MuiList-root {
     width: 100%;
+}
+
+.profile-img img {
+    border-radius: 50%;
+    width: 100%;
+    height: auto;
+}
+
+.profile-feed img {
+    margin: 10px;
+    width: 94%;
+    height: auto;
 }

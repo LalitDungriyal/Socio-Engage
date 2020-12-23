@@ -1,5 +1,5 @@
-import React,{useContext,useRef,useEffect,useState} from 'react'
-import { Container, Form, FormControl, Nav, Navbar } from 'react-bootstrap'
+import React,{useContext} from 'react'
+import { Container, Nav, Navbar } from 'react-bootstrap'
 import {Link, useHistory} from 'react-router-dom'
 import {UserContext} from '../App'
 import Button from '@material-ui/core/Button';

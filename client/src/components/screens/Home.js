@@ -1,6 +1,6 @@
-import { Accordion, AccordionDetails, AccordionSummary, Avatar, CardHeader, Divider, IconButton, InputAdornment, List, ListItem, ListItemText, Paper, TextField } from '@material-ui/core'
+import { Accordion, AccordionDetails, AccordionSummary, Avatar, CardHeader, Divider, IconButton, List, ListItem, ListItemText, Paper, TextField } from '@material-ui/core'
 import React, {useState, useEffect, useContext} from 'react'
-import { Button, Card, Container, Row } from 'react-bootstrap'
+import { Card, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import {UserContext} from '../../App'
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -38,7 +38,7 @@ const Home  = ()=>{
       }).then(res => res.json())
       .then(result => {
          const newData = data.map(item => {
-            if(item._id == result._id) {
+            if(item._id === result._id) {
                return result
             }
             else {
@@ -63,7 +63,7 @@ const Home  = ()=>{
       }).then(res => res.json())
       .then(result => {
          const newData = data.map(item => {
-            if(item._id == result._id) {
+            if(item._id === result._id) {
                return result
             }
             else {
@@ -89,7 +89,7 @@ const Home  = ()=>{
       }).then(res=>res.json())
       .then(result=>{
           const newData = data.map(item=>{
-            if(item._id==result._id){
+            if(item._id===result._id){
                 return result
             }else{
                 return item
@@ -132,7 +132,7 @@ const Home  = ()=>{
                                     </Avatar>
                                  }
                                  action={
-                                    item.postedBy._id == state._id 
+                                    item.postedBy._id === state._id 
                                     &&
                                     <IconButton 
                                        variant="primary"

@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import {Link,useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import { Card, Container, Row } from 'react-bootstrap'
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import {FormControl, IconButton, Input, InputAdornment, InputLabel } from '@material-ui/core';
+import {FormControl, Input, InputLabel } from '@material-ui/core';
 
 const CreatePost = () => {
 

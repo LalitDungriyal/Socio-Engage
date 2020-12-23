@@ -1,4 +1,4 @@
-import { Card, Paper } from '@material-ui/core'
+import { Card } from '@material-ui/core'
 import React, {useEffect, useState, useContext} from 'react'
 import {Container, Image, Row } from 'react-bootstrap'
 import {UserContext} from '../../App'
@@ -97,7 +97,7 @@ const Profile  = ()=>{
                         {myposts.map((item, index) => {
                             return (
                                 <div key={index} className="col-12 col-md-3 profile-feed">
-                                    <img src={item.photo}/>
+                                    <img src={item.photo} alt="..."/>
                                 </div>
                             )
                         })}

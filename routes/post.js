@@ -48,6 +48,7 @@ router.post('/createpost', requireLogin, (req, res) => {
 router.get('/myposts', requireLogin, (req, res) => {
     Post.find({postedBy: req.user._id})
     .populate("postedBy", "_id name")
+    .populate("comments.postedBy","_id name")
     .then((myPosts) => {
         res.json({myPost: myPosts})
     })
@@ -63,6 +64,7 @@ router.put('/like', requireLogin, (req, res) => {
         new: true
     })
     .populate("postedBy","_id name")
+    .populate("comments.postedBy","_id name")
     .exec((err, result) => {
         if(err) {
             return res.status(422).json({error: err})
@@ -80,6 +82,7 @@ router.put('/unlike', requireLogin, (req, res) => {
         new: true
     })
     .populate("postedBy","_id name")
+    .populate("comments.postedBy","_id name")
     .exec((err, result) => {
         if(err) {
             return res.status(422).json({error: err})

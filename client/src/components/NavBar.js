@@ -111,7 +111,7 @@ const NavBar = ()=>{
     return(
       <Navbar fixed="top" bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">Socio Connect</Navbar.Brand>
+          <Navbar.Brand href="#home">Socio Engage</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             {renderNav()}

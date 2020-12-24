@@ -109,7 +109,7 @@ const NavBar = ()=>{
     }
 
     return(
-      <Navbar fixed="top" bg="light" expand="lg">
+      <Navbar className="main-navbar" fixed="top" expand="lg">
         <Container>
           <Navbar.Brand href="#home">Socio Engage</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

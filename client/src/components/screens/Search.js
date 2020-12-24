@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import SearchIcon from '@material-ui/icons/Search';
 import { Card, Divider, InputAdornment, List, ListItem, ListItemText, TextField } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const Search = ()=>{
 
@@ -64,12 +65,15 @@ const Search = ()=>{
                     <Card>
                         <List>
                             {searchResult.map((item, index) => {
+                                const link = "/profile/"+item._id
                                 return (
                                     <div id="index">
                                         <Divider/>
-                                        <ListItem>
-                                            <ListItemText primary={item.name}/>
-                                        </ListItem>
+                                        <Link to={link}>
+                                            <ListItem>
+                                                <ListItemText primary={item.name}/>
+                                            </ListItem>
+                                        </Link>
                                     </div>
                                 )
                             })}

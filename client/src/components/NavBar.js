@@ -12,6 +12,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 const NavBar = ()=>{
 
+    const [expanded, setExpanded] = useState(false);
     const {state, dispatch} = useContext(UserContext)
     const history = useHistory()
     
@@ -20,7 +21,7 @@ const NavBar = ()=>{
         return  (
           <>
             <Nav className="mr-auto">
-              <Link to="/" className="nav-link">
+              <Link to="/" className="nav-link" onClick={() => setExpanded(false)}>
                 <Button
                   size="large"
                   startIcon={<ExploreIcon/>}
@@ -29,7 +30,7 @@ const NavBar = ()=>{
                 </Button>
               </Link>
 
-              <Link to="/followingpost" className="nav-link">
+              <Link to="/followingpost" className="nav-link" onClick={() => setExpanded(false)}>
                 <Button
                   size="large"
                   startIcon={<InboxIcon/>}
@@ -38,7 +39,7 @@ const NavBar = ()=>{
                 </Button>
               </Link>
 
-              <Link to="/createpost" className="nav-link">
+              <Link to="/createpost" className="nav-link" onClick={() => setExpanded(false)}>
                 <Button
                   size="large"
                   startIcon={<PostAddIcon/>}
@@ -47,7 +48,7 @@ const NavBar = ()=>{
                 </Button>
               </Link>
 
-              <Link to="/search" className="nav-link">
+              <Link to="/search" className="nav-link" onClick={() => setExpanded(false)}>
                 <Button
                     size="large"
                     startIcon={<SearchIcon/>}
@@ -57,7 +58,7 @@ const NavBar = ()=>{
               </Link>
             </Nav>
             <Nav>
-              <Link to="/profile" className="nav-link">
+              <Link to="/profile" className="nav-link" onClick={() => setExpanded(false)}>
                 <Button
                   size="large"
                   endIcon={<AccountCircleIcon/>}
@@ -65,7 +66,7 @@ const NavBar = ()=>{
                   Profile
                 </Button>
               </Link>
-              <Link className="nav-link">
+              <Link className="nav-link" onClick={() => setExpanded(false)}>
                 <Button
                   size="large" 
                   variant="contained" 
@@ -88,14 +89,14 @@ const NavBar = ()=>{
         return (
           <>
             <Nav className="ml-auto">
-              <Link to="/signin" className="nav-link">
+              <Link to="/signin" className="nav-link" onClick={() => setExpanded(false)}>
                 <Button
                   size="large"
                 >
                   Sign In
                 </Button>
               </Link>
-              <Link to="/signup" className="nav-link">
+              <Link to="/signup" className="nav-link" onClick={() => setExpanded(false)}>
                 <Button
                   size="large"
                 >
@@ -109,10 +110,10 @@ const NavBar = ()=>{
     }
 
     return(
-      <Navbar className="main-navbar" fixed="top" expand="lg">
+      <Navbar expanded={expanded} className="main-navbar" fixed="top" expand="lg">
         <Container>
           <Navbar.Brand href="#home">Socio Engage</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle onClick={() => setExpanded(expanded ? false : "expanded")} aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             {renderNav()}
           </Navbar.Collapse>

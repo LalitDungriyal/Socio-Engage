@@ -1,5 +1,5 @@
-import React,{useContext} from 'react'
-import { Container, Nav, Navbar } from 'react-bootstrap'
+import React,{useContext, useState} from 'react'
+import { Container, Modal, Nav, Navbar } from 'react-bootstrap'
 import {Link, useHistory} from 'react-router-dom'
 import {UserContext} from '../App'
 import Button from '@material-ui/core/Button';
@@ -8,6 +8,7 @@ import InboxIcon from '@material-ui/icons/Inbox';
 import ExploreIcon from '@material-ui/icons/Explore';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import SearchIcon from '@material-ui/icons/Search';
 
 const NavBar = ()=>{
 
@@ -45,6 +46,15 @@ const NavBar = ()=>{
                   Post
                 </Button>
               </Link>
+
+              <Link to="/search" className="nav-link">
+                <Button
+                    size="large"
+                    startIcon={<SearchIcon/>}
+                >
+                  Search
+                </Button>
+              </Link>
             </Nav>
             <Nav>
               <Link to="/profile" className="nav-link">
@@ -55,41 +65,45 @@ const NavBar = ()=>{
                   Profile
                 </Button>
               </Link>
-              <Button 
-                variant="contained" 
-                color="primary"
-                size="small"
-                endIcon={<ExitToAppIcon/>}
-                onClick={() => {
-                  localStorage.clear()
-                  dispatch({type: "CLEAR"})
-                  history.push('/signin')
-                }}
-              >
-                Logout
-              </Button>
+              <Link className="nav-link">
+                <Button
+                  size="large" 
+                  variant="contained" 
+                  color="secondary"
+                  endIcon={<ExitToAppIcon/>}
+                  onClick={() => {
+                    localStorage.clear()
+                    dispatch({type: "CLEAR"})
+                    history.push('/signin')
+                  }}
+                >
+                  Logout
+                </Button>
+              </Link>
             </Nav>
           </>
         )
       }
       else {
         return (
-          <Nav className="ml-auto">
-            <Link to="/signin" className="nav-link">
-              <Button
-                size="large"
-              >
-                Sign In
-              </Button>
-            </Link>
-            <Link to="/signup" className="nav-link">
-              <Button
-                size="large"
-              >
-                Sign Up
-              </Button>
-            </Link>
-          </Nav>
+          <>
+            <Nav className="ml-auto">
+              <Link to="/signin" className="nav-link">
+                <Button
+                  size="large"
+                >
+                  Sign In
+                </Button>
+              </Link>
+              <Link to="/signup" className="nav-link">
+                <Button
+                  size="large"
+                >
+                  Sign Up
+                </Button>
+              </Link>
+            </Nav>
+          </>
         )
       }
     }

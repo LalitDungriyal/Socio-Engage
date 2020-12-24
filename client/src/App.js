@@ -9,6 +9,7 @@ import Signup from './components/screens/Signup'
 import CreatePost from './components/screens/CreatePost';
 import {initialState, reducer} from './Reducers/userReducer'
 import SubUserPosts from './components/screens/SubUserPosts';
+import Search from './components/screens/Search';
 
 export const UserContext = createContext()
 
@@ -50,6 +51,9 @@ const Routing = () => {
         </Route>
         <Route path="/followingpost">
           <SubUserPosts/>
+        </Route>
+        <Route path="/search">
+          <Search/>
         </Route>
       </Switch>
   )
